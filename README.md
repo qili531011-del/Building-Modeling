@@ -29,7 +29,10 @@ Several mature simulation platforms have been widely used to develop and analyze
 In summary, white-box models are powerful tools for physically interpretable building simulation and performance analysis. However, they often require detailed input data, domain expertise, and calibration effort, which can make them difficult to scale. This trade-off provides the motivation for black-box and gray-box modeling approaches that offer greater flexibility in data-rich building applications.
 
 ## Black-box Models
-This category encompasses a wide spectrum of machine learning and deep learning techniques — including recurrent neural networks (RNNs), transformers, federated learning frameworks, and end-to-end learning pipelines — which have demonstrated strong predictive performance, particularly when large-scale sensor data is available.
+Black-box models learn building thermal dynamics directly from operational data without explicitly modeling the underlying physical processes such as heat conduction, convection, or thermal storage. Instead of constructing equations based on building geometry, material properties, or HVAC system configurations, these models rely on historical input-output data to approximate the mapping between driving variables (e.g., outdoor temperature, solar radiation, HVAC control signals, internal heat gains) and thermal responses (e.g., indoor temperature, zone thermal load).
+### Model Structures
+
+### Model Training
 
 ## Gray-box Models
 Representative approaches include Physics-Informed Neural Networks (PINNs), which embed governing differential equations as soft constraints during neural network training, and Resistance-Capacitance (RC) thermal network models, which abstract building thermal dynamics into compact equivalent circuits whose parameters are identified from data. These hybrid methods offer improved sample efficiency and interpretability compared to pure black-box approaches, while relaxing the detailed input requirements of white-box simulators.
