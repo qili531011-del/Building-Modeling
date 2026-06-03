@@ -30,6 +30,12 @@ In summary, white-box models are powerful tools for physically interpretable bui
 
 ## Black-box Models
 Black-box models learn building thermal dynamics directly from operational data without explicitly modeling the underlying physical processes such as heat conduction, convection, or thermal storage. Instead of constructing equations based on building geometry, material properties, or HVAC system configurations, these models rely on historical input-output data to approximate the mapping between driving variables (e.g., outdoor temperature, solar radiation, HVAC control signals, internal heat gains) and thermal responses (e.g., indoor temperature, zone thermal load).
+
+The general form of a black-box thermal dynamic model can be expressed as:
+$$T_{k+1} = f(T_k, T_{k-1}, \dots, u_k, u_{k-1}, \dots, \omega_k, \omega_{k-1}, \dots)$$
+where $T_k$ denotes the indoor temperature at time step $k$, $u_k$ represents the control inputs (e.g., HVAC, heating/cooling power, supply air temperature, fan speed), $\omega_k$ denotes the external disturbances (e.g., outdoor temperature, solar irradiance, occupancy), and $f(\cdot)$ is a nonlinear function learned entirely from data.
+
+Black-box models can achieve strong predictive performance, particularly when large-scale sensor data is available. However, they typically 
 ### Model Structures
 
 ### Model Training
