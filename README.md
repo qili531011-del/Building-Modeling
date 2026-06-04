@@ -307,16 +307,14 @@ where $X_k$ contains historical indoor temperature, control inputs, weather dist
 In an end-to-end sequence prediction setting, the model may directly map a historical input sequence to a future temperature trajectory:
 
 $$
-[\hat{T}_{k+1}, \hat{T}_{k+2}, \dots, \hat{T}_{k+H}]
-=
-f_{\text{E2E}}([x_{k-n+1}, x_{k-n+2}, \dots, x_k]; \theta)
+[\hat{T}_{k+1}, \hat{T}_{k+2}, \dots, \hat{T}_{k+H}]=f_{\text{E2E}}([x_{k-n+1}, x_{k-n+2}, \dots, x_k]; \theta)
 $$
 
 where $n$ is the input window length and $H$ is the prediction horizon.
 
 Compared with conventional training pipelines, end-to-end learning reduces the need for manual feature engineering and intermediate modeling steps. For example, instead of separately estimating internal heat gains, thermal resistance, or occupancy impact, an end-to-end model can learn these latent relationships directly from data. This is especially useful when the physical parameters of the building are unknown or difficult to measure.
 
-End-to-end learning is also important for control-oriented applications. In model predictive control, MPC, the learned thermal model can be embedded into an optimization framework to predict future temperature responses under different control actions. Alternatively, in reinforcement learning or imitation learning, an end-to-end policy model can directly map observed building states to control actions:
+End-to-end learning is also important for control-oriented applications. In model predictive control (MPC), the learned thermal model can be embedded into an optimization framework to predict future temperature responses under different control actions. Alternatively, in reinforcement learning or imitation learning, an end-to-end policy model can directly map observed building states to control actions:
 
 $$
 u_k = \pi(s_k; \theta)
@@ -327,24 +325,13 @@ where $s_k$ is the observed state, including indoor temperature, weather forecas
 For purely predictive tasks, the end-to-end training objective is usually based on prediction error:
 
 $$
-\mathcal{L}_{\text{pred}}(\theta)
-=
-\frac{1}{N}\sum_{i=1}^{N}
-\left\|
-Y_i - f_{\text{E2E}}(X_i; \theta)
-\right\|_2^2
+\mathcal{L}_{\text{pred}}(\theta)=\frac{1}{N}\sum_{i=1}^{N}\left\|Y_i - f_{\text{E2E}}(X_i; \theta)\right\|_2^2
 $$
 
 For control-oriented learning, the objective may include multiple terms, such as thermal comfort violation, energy consumption, and control smoothness:
 
 $$
-\mathcal{L}_{\text{control}}
-=
-\lambda_1 \mathcal{L}_{\text{comfort}}
-+
-\lambda_2 \mathcal{L}_{\text{energy}}
-+
-\lambda_3 \mathcal{L}_{\text{smoothness}}
+\mathcal{L}_{\text{control}}=\lambda_1 \mathcal{L}_{\text{comfort}} + \lambda_2 \mathcal{L}_{\text{energy}}+\lambda_3 \mathcal{L}_{\text{smoothness}}
 $$
 
 where $\lambda_1$, $\lambda_2$, and $\lambda_3$ are weighting coefficients.
@@ -394,5 +381,6 @@ A summary of these strategies is shown below.
 | Explainable AI | Interpret and diagnose black-box model behavior | Improves transparency; supports feature selection and physical plausibility checking | Often post-hoc; explanations may be approximate or method-dependent |
 
 Overall, model training for black-box building thermal dynamics should be designed according to the target application. For single-building prediction with sufficient historical data, centralized supervised learning is usually adequate. For large-scale deployment across multiple buildings with privacy constraints, federated learning provides an attractive solution. For prediction or control tasks with rich sensor data, end-to-end learning can capture complex nonlinear and temporal relationships. Finally, explainable AI should be incorporated to improve model transparency, validate physical plausibility, and increase trust in practical building energy applications.
+
 ## Gray-box Models
 Representative approaches include Physics-Informed Neural Networks (PINNs), which embed governing differential equations as soft constraints during neural network training, and Resistance-Capacitance (RC) thermal network models, which abstract building thermal dynamics into compact equivalent circuits whose parameters are identified from data. These hybrid methods offer improved sample efficiency and interpretability compared to pure black-box approaches, while relaxing the detailed input requirements of white-box simulators.
