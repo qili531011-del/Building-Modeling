@@ -43,13 +43,12 @@ This section covers two aspects of black-box modeling for building thermal dynam
 $f(\cdot)$, ranging from traditional machine learning methods such as support vector regression and gradient boosting trees to deep learning architectures such as MLP, LSTM, GRU, and TCN. The second part discusses model training strategies, including federated learning, end-to-end learning, and explainable AI.
 
 ### Model Structures
-### Model Structures
 
 Black-box thermal dynamic models differ mainly in the choice of function approximator used to learn the nonlinear mapping $f(\cdot)$. In building thermal modeling, the input to the model is usually constructed from historical indoor temperatures, control inputs, weather variables, occupancy-related variables, and other measurable disturbances. Depending on how temporal dependencies are represented, black-box model structures can be broadly divided into traditional machine learning models and deep learning models.
 
 #### Support Vector Regression
 
-Support Vector Regression, SVR, is one of the commonly used traditional machine learning methods for building thermal dynamics prediction. SVR approximates the nonlinear relationship between input features and thermal responses by mapping the original input space into a high-dimensional feature space through kernel functions. A typical SVR-based thermal model can be written as:
+Support Vector Regression (SVR) is one of the commonly used traditional machine learning methods for building thermal dynamics prediction. SVR approximates the nonlinear relationship between input features and thermal responses by mapping the original input space into a high-dimensional feature space through kernel functions. A typical SVR-based thermal model can be written as:
 
 $$
 T_{k+1} = f_{\text{SVR}}(x_k)
@@ -81,13 +80,13 @@ Compared with neural networks, tree-based models are easier to train and can pro
 
 #### Multi-layer Perceptron
 
-Multi-layer Perceptron, MLP, is a basic feedforward neural network structure that can approximate complex nonlinear mappings between input features and thermal responses. An MLP-based thermal dynamic model can be expressed as:
+Multi-layer Perceptron (MLP) is a basic feedforward neural network structure that can approximate complex nonlinear mappings between input features and thermal responses. An MLP-based thermal dynamic model can be expressed as:
 
 $$
 T_{k+1} = f_{\text{MLP}}(x_k; \theta)
 $$
 
-where $\theta$ denotes the trainable parameters of the neural network. The feature vector $x_k$ usually includes lagged indoor temperatures, HVAC control variables, weather disturbances, occupancy indicators, and time-related features.
+where $\theta$ denotes the trainable parameters of the neural network; the feature vector $x_k$ usually includes lagged indoor temperatures, HVAC control variables, weather disturbances, occupancy indicators, and time-related features.
 
 A typical MLP consists of an input layer, several hidden layers with nonlinear activation functions, and an output layer. The hidden layers learn nonlinear combinations of input variables, allowing the model to represent complex thermal response patterns.
 
@@ -95,7 +94,7 @@ MLP models are simple, flexible, and easy to implement. They are suitable when t
 
 #### Recurrent Neural Networks
 
-Building thermal dynamics are inherently time-dependent because indoor temperature is affected not only by current inputs but also by previous thermal states and accumulated heat storage effects. Recurrent Neural Networks, RNNs, are designed to model sequential data by maintaining hidden states that carry information from previous time steps.
+Building thermal dynamics are inherently time-dependent because indoor temperature is affected not only by current inputs but also by previous thermal states and accumulated heat storage effects. Recurrent Neural Networks (RNNs) are designed to model sequential data by maintaining hidden states that carry information from previous time steps.
 
 A general recurrent thermal model can be written as:
 
@@ -113,7 +112,7 @@ Basic RNNs can model temporal dependencies, but they often suffer from vanishing
 
 #### Long Short-Term Memory Networks
 
-Long Short-Term Memory, LSTM, is a recurrent neural network architecture designed to capture long-term temporal dependencies. LSTM introduces memory cells and gating mechanisms to control the flow of information over time. This makes it suitable for modeling building thermal inertia, delayed HVAC effects, and the accumulated influence of disturbances.
+Long Short-Term Memory (LSTM) is a recurrent neural network architecture designed to capture long-term temporal dependencies. LSTM introduces memory cells and gating mechanisms to control the flow of information over time. This makes it suitable for modeling building thermal inertia, delayed HVAC effects, and the accumulated influence of disturbances.
 
 For building thermal dynamics, an LSTM model takes a sequence of historical input features as input:
 
@@ -133,7 +132,7 @@ LSTM models can automatically learn temporal dependencies from historical data w
 
 #### Gated Recurrent Unit Networks
 
-Gated Recurrent Unit, GRU, is another recurrent neural network architecture that uses gating mechanisms to capture temporal dependencies. Compared with LSTM, GRU has a simpler structure with fewer parameters, typically using update and reset gates instead of separate input, forget, and output gates.
+Gated Recurrent Unit (GRU) is another recurrent neural network architecture that uses gating mechanisms to capture temporal dependencies. Compared with LSTM, GRU has a simpler structure with fewer parameters, typically using update and reset gates instead of separate input, forget, and output gates.
 
 A GRU-based thermal model can be represented as:
 
@@ -147,7 +146,7 @@ GRU models often achieve similar predictive performance to LSTM models while req
 
 #### Temporal Convolutional Networks
 
-Temporal Convolutional Networks, TCNs, provide an alternative to recurrent architectures for sequence modeling. Instead of processing time-series data recurrently, TCNs use one-dimensional causal convolutions to capture temporal dependencies. A causal convolution ensures that the prediction at time step $k+1$ only depends on current and past information, avoiding information leakage from future data.
+Temporal Convolutional Networks (TCNs) provide an alternative to recurrent architectures for sequence modeling. Instead of processing time-series data recurrently, TCNs use one-dimensional causal convolutions to capture temporal dependencies. A causal convolution ensures that the prediction at time step $k+1$ only depends on current and past information, avoiding information leakage from future data.
 
 A TCN-based thermal dynamic model can be written as:
 
